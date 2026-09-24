@@ -12,6 +12,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/document-internationalization": "^6.2.37",
     "@sanity/icons": "^5.2.1",
     "@sanity/ui": "^4.0.6",
     "@sanity/vision": "6.10.1",

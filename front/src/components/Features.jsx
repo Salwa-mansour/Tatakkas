@@ -19,7 +19,7 @@ const urlFor = (source) => builder.image(source)
 function Features({data}) {
      const containerRef = useRef()
      const headingRef = useRef(null);
-   
+
         useGSAP(() => {
 
           gsap.from(headingRef.current.children, {
@@ -560,7 +560,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
 <div className='features-container'>
   {/* Feature 1 */}
   <div className="feature sunny-feature">
-    <img src={data?.featuresList?.[0]?.image ? urlFor(data.featuresList[0].image).url() : 'https://res.cloudinary.com/du6d1qifw/image/upload/v1789199374/muttajahSite/stephen-crane-hPuCMQLiZ8U-unsplash_ljum9m.jpg'} alt="Feature 1" />
+    <img src={data?.featuresList?.[0]?.image ? urlFor(data.featuresList[0].image).url():""} alt="Feature 1" />
     <div className="feature-content">
       <h2>{data?.featuresList?.[0]?.heading || 'Feature 1'}</h2>
       <p>{data?.featuresList?.[0]?.text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</p>
@@ -574,10 +574,10 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
 
   {/* Feature 2 */}
   <div className="feature cloud-sun-feature">
-    <img src={data?.featuresList?.[1]?.image ? urlFor(data.featuresList[1].image).url() : 'https://res.cloudinary.com/du6d1qifw/image/upload/v1789203541/muttajahSite/david-becker-6BPmpe2o1aw-unsplash_muo5dk.jpg'} alt="Feature 2" width="300" />
+    <img src={data?.featuresList?.[1]?.image ? urlFor(data.featuresList[1].image).url() :""} alt="Feature 2" width="300" />
     <div className="feature-content">
-      <h2>{data?.featuresList?.[1]?.heading || 'Feature 2'}</h2>
-      <p>{data?.featuresList?.[1]?.text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</p>
+      <h2>{data?.featuresList?.[1]?.heading}</h2>
+      <p>{data?.featuresList?.[1]?.text }</p>
     </div>
      <Link
         to={`/post/${data?.featuresList?.[1]?.postId}`}
@@ -588,10 +588,10 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
 
   {/* Feature 3 (Fallback safely if data has fewer items) */}
   <div className="feature cloudy-feature">
-    <img src={data?.featuresList?.[2]?.image ? urlFor(data.featuresList[2].image).url() : 'https://res.cloudinary.com/du6d1qifw/image/upload/v1789199406/muttajahSite/soma-laszlo-rt4SRyA29TE-unsplash_rwfwii.jpg'} alt="Feature 3" width="300" />
+    <img src={data?.featuresList?.[2]?.image ? urlFor(data.featuresList[2].image).url() : ''} alt="Feature 3" width="300" />
     <div className="feature-content">
-      <h2>{data?.featuresList?.[2]?.heading || 'Feature 3'}</h2>
-      <p>{data?.featuresList?.[2]?.text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</p>
+      <h2>{data?.featuresList?.[2]?.heading }</h2>
+      <p>{data?.featuresList?.[2]?.text }</p>
     </div>
      <Link
         to={`/post/${data?.featuresList?.[2]?.postId}`}
@@ -602,10 +602,10 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
 
   {/* Feature 4 */}
   <div className="feature rainy-feature">
-    <img src={data?.featuresList?.[3]?.image ? urlFor(data.featuresList[3].image).url() : 'https://res.cloudinary.com/du6d1qifw/image/upload/v1789199316/muttajahSite/stanislav-margolin-CRmUtjJE3nM-unsplash_lmd5rt.jpg'} alt="Feature 4" width="300" />
+    <img src={data?.featuresList?.[3]?.image ? urlFor(data.featuresList[3].image).url() : ''} alt="Feature 4" width="300" />
     <div className="feature-content">
-      <h2>{data?.featuresList?.[3]?.heading || 'Feature 4'}</h2>
-      <p>{data?.featuresList?.[3]?.text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</p>
+      <h2>{data?.featuresList?.[3]?.heading }</h2>
+      <p>{data?.featuresList?.[3]?.text }</p>
     </div>
      <Link
         to={`/post/${data?.featuresList?.[3]?.postId}`}
@@ -616,10 +616,10 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
 
   {/* Feature 5 */}
   <div className="feature snowy-feature">
-    <img src={data?.featuresList?.[4]?.image ? urlFor(data.featuresList[4].image).url() : 'https://res.cloudinary.com/du6d1qifw/image/upload/v1789203977/muttajahSite/compagnons-z2_GyXqzOcE-unsplash_tztju3.jpg'} alt="Feature 5" width="300" />
+    <img src={data?.featuresList?.[4]?.image ? urlFor(data.featuresList[4].image).url() : ''} alt="Feature 5" width="300" />
     <div className="feature-content">
-      <h2>{data?.featuresList?.[4]?.heading || 'Feature 5'}</h2>
-      <p>{data?.featuresList?.[4]?.text || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'}</p>
+      <h2>{data?.featuresList?.[4]?.heading }</h2>
+      <p>{data?.featuresList?.[4]?.text }</p>
     </div>
      <Link
         to={`/post/${data?.featuresList?.[4]?.postId}`}

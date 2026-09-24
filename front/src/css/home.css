@@ -159,7 +159,7 @@
     left: 60%;
    }
   .hero .hero-content {
-    left: 10%;
+    inset-inline-start: 10%;
     text-align: initial;
    }
 }

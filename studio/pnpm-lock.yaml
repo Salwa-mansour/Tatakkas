@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@sanity/document-internationalization':
+        specifier: ^6.2.37
+        version: 6.2.37(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity-plugin-internationalized-array@5.3.1(d12cdc6464e9e60c4d850e4b963df034))(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
       '@sanity/icons':
         specifier: ^5.2.1
         version: 5.2.2(react@19.3.0)
@@ -1644,6 +1647,15 @@ packages:
     resolution: {integrity: sha512-5DlYyVhRbaeectF0EzCdrwXcGj8sIz6Mw4TF9ZHzFGZu3BdoSjvShuR5wXSw94wBejrD1MHIo6TPEZ9TKDtWdQ==}
     engines: {node: '>=22.12'}
 
+  '@sanity/document-internationalization@6.2.37':
+    resolution: {integrity: sha512-CSdKFTIUUppToDdYz4hgh199PVaS0h91AuPUyZc33pF62HPowQ2ofy7VFMv9Jd9sLZYsuFD/uENWLI51RwCeKg==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      react: ^19.2
+      react-dom: ^19.2
+      sanity: ^5 || ^6.0.0-0
+      sanity-plugin-internationalized-array: ^5.3.1
+
   '@sanity/eslint-config-studio@6.0.0':
     resolution: {integrity: sha512-IfIItATVN5QhlwA3mWGBnWIHpfnQSa1XuTL1BOIZdzkcg02AAWjHcU40Z9WrWWCll1yPbmmAWvmSU4PX9DsBTA==}
     engines: {node: '>=18.18'}
@@ -1688,6 +1700,14 @@ packages:
   '@sanity/json-match@1.0.5':
     resolution: {integrity: sha512-skhIX8gT/hLritEBkjfc7+TBlJNu/NLisyA8noKceCk28OatFK0wX7dIuFawkt3pfhTYVomVPykAYFcIm2OqJg==}
     engines: {node: '>=18.2'}
+
+  '@sanity/language-filter@5.0.18':
+    resolution: {integrity: sha512-4dV2mOFi3HVYCPqTPYnQgxmBpluaOMmsDMX+K/KW/ISCfygnHPwU2pfSvzULdSnD2pQy0z67RRWbv3CVJhSL9g==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      react: ^19.2
+      react-dom: ^19.2
+      sanity: ^5 || ^6.0.0-0
 
   '@sanity/lezer-groq@1.0.4':
     resolution: {integrity: sha512-KgCmAY7yXll+g3+1z+GZiQhlEW7ulJGUH8gGzbUgKVZShPop/dDjfwNAdGZKFY3AkF+m62oSa1X8m1P3sonD4A==}
@@ -4066,6 +4086,12 @@ packages:
     peerDependencies:
       react: '>=18.0.0'
 
+  react-rx@4.2.5:
+    resolution: {integrity: sha512-n1kHm1W81p9FgBygKpw1pkqJAIp2xAJS5Jpbef89UgPxG6twsuQfj5TRnCeTkr5GiA36qgxkMjkmUjNWQT1tVg==}
+    peerDependencies:
+      react: ^18.3 || >=19.0.0-0
+      rxjs: ^7
+
   react-rx@5.1.2:
     resolution: {integrity: sha512-zpY8sQPjUjCq6EmLpr6t/wFQipKxmlPqymhv4IWyImAXP+Wmdflx/cLMXBO1+HLmdTCBuspcoVVIid1wsi9Mkw==}
     engines: {node: '>=22.12'}
@@ -4234,6 +4260,19 @@ packages:
       react-dom: ^19.2
       sanity: ^5 || ^6.0.0-0
       styled-components: ^6.1
+
+  sanity-plugin-internationalized-array@5.3.1:
+    resolution: {integrity: sha512-u2btd/GYlSm+XQnMA38aaZAeUU1tUAgfc9z07SAoTZacoMIvJvKeUbbGgfjY2C/ZvMldknRqcAfxwj/6PXMdFw==}
+    engines: {node: '>=20.19 <22 || >=22.12'}
+    peerDependencies:
+      '@sanity/assist': ^6.2.1
+      '@sanity/language-filter': ^5.0.18
+      react: ^19.2
+      react-dom: ^19.2
+      sanity: ^5 || ^6.0.0-0
+    peerDependenciesMeta:
+      '@sanity/assist':
+        optional: true
 
   sanity-plugin-utils@2.0.18:
     resolution: {integrity: sha512-kidiiOIkR1U2r6aaZoSLu8/5S7wUZfQ50SFmLf6nRSFq5Org5v+uyRhQTeD5KYXJ76I5BaovhR89WbiwlIk7Ww==}
@@ -6855,6 +6894,24 @@ snapshots:
     dependencies:
       '@sanity/diff-match-patch': 3.2.0
 
+  '@sanity/document-internationalization@6.2.37(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity-plugin-internationalized-array@5.3.1(d12cdc6464e9e60c4d850e4b963df034))(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))':
+    dependencies:
+      '@sanity/icons': 5.2.2(react@19.3.0)
+      '@sanity/mutator': 6.15.0(@types/react@19.3.0)
+      '@sanity/ui': 4.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      '@sanity/util': 6.15.0(@types/react@19.3.0)
+      '@sanity/uuid': 3.0.3
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      rxjs: 7.8.2
+      sanity: 6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3)
+      sanity-plugin-internationalized-array: 5.3.1(d12cdc6464e9e60c4d850e4b963df034)
+      sanity-plugin-utils: 2.0.18(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+    transitivePeerDependencies:
+      - '@types/react'
+      - styled-components
+      - vitest
+
   '@sanity/eslint-config-studio@6.0.0(eslint@9.39.5(jiti@2.7.0))(typescript@5.9.3)':
     dependencies:
       eslint: 9.39.5(jiti@2.7.0)
@@ -6923,6 +6980,18 @@ snapshots:
       - vitest
 
   '@sanity/json-match@1.0.5': {}
+
+  '@sanity/language-filter@5.0.18(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))':
+    dependencies:
+      '@sanity/icons': 5.2.2(react@19.3.0)
+      '@sanity/ui': 4.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      react-rx: 4.2.5(react@19.3.0)(rxjs@7.8.2)
+      rxjs: 7.8.2
+      sanity: 6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - styled-components
 
   '@sanity/lezer-groq@1.0.4':
     dependencies:
@@ -9620,6 +9689,14 @@ snapshots:
       unist-util-filter: 5.0.1
       unist-util-visit-parents: 6.0.2
 
+  react-rx@4.2.5(react@19.3.0)(rxjs@7.8.2):
+    dependencies:
+      observable-callback: 1.0.3(rxjs@7.8.2)
+      react: 19.3.0
+      react-compiler-runtime: 1.0.0(react@19.3.0)
+      rxjs: 7.8.2
+      use-effect-event: 2.0.4(react@19.3.0)
+
   react-rx@5.1.2(react@19.3.0)(rxjs@7.8.2):
     dependencies:
       react: 19.3.0
@@ -9839,6 +9916,21 @@ snapshots:
       styled-components: 6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
     transitivePeerDependencies:
       - '@types/react'
+      - vitest
+
+  sanity-plugin-internationalized-array@5.3.1(d12cdc6464e9e60c4d850e4b963df034):
+    dependencies:
+      '@sanity/icons': 5.2.2(react@19.3.0)
+      '@sanity/language-filter': 5.0.18(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      '@sanity/ui': 4.2.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
+      '@sanity/util': 6.15.0(@types/react@19.3.0)
+      lodash-es: 4.18.1
+      react: 19.3.0
+      react-dom: 19.3.0(react@19.3.0)
+      sanity: 6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@types/react'
+      - styled-components
       - vitest
 
   sanity-plugin-utils@2.0.18(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(sanity@6.15.0(@babel/core@7.29.7)(@babel/runtime@7.29.7)(@noble/hashes@2.4.0)(@rolldown/plugin-babel@0.2.4(@babel/core@7.29.7)(@babel/runtime@7.29.7)(rolldown@1.2.9)(vite@8.3.0(jiti@2.7.0)(yaml@2.9.1)))(@types/react@19.3.0)(jiti@2.7.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(rolldown@1.2.9)(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(typescript@5.9.3))(styled-components@6.5.3(react-dom@19.3.0(react@19.3.0))(react@19.3.0)):
