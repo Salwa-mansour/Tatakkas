@@ -1,0 +1,362 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/* Quicksand - Inconsolata - Cutive Mono -Dosis */
+body{
+     font-family: "Quicksand", sans-serif;
+     font-weight: 300;
+     color: #fff;
+     font-size: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  line-height: 1.6;
+}
+body p,
+body a,
+.text-container{
+    font-weight: 400;
+}
+
+button{
+    font-family: "Quicksand", sans-serif
+}
+h1,h2,h3,h4,h5,h6{
+     /* font-family: "Cutive Mono", serif; */
+     /* font-weight: 400; */
+     margin-bottom: 2rem;
+     text-transform: capitalize;
+}
+a {
+    color: #fff;
+   
+}
+.nav-items {
+    list-style: none;
+}
+.nav-items a{
+     text-decoration: none; 
+}
+.nav {
+    position:absolute ;
+    background-color: transparent;
+    height: 60px;
+    padding:1rem;
+    width: 100%;
+    z-index: 30;
+    display: flex;
+     /* color: #000; */
+    align-items: center;
+    background: linear-gradient(to top, rgb(0 0 0 / 0%) 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+/* .nav a{
+    font-weight: 500;
+    color: #000;
+} */
+.nav{
+    position:absolute ;
+}
+.nav a{
+   color: white;
+    font-weight: 300;
+}
+.nav .nav-items {
+   
+    display: flex;
+   
+    align-items: center;
+    
+    height: 80%;
+}
+.logo{
+    display: block;
+    height: 80%;
+    width: 150px;
+    min-width: 0;
+    margin-inline-end:auto ;
+}
+.nav .nav-items li{
+    height: 100%;
+  
+}
+.nav .nav-items li:not(:last-child){
+  
+    margin-inline: .75rem;
+}
+.nav  li a{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem;
+}
+.logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.section-heading{
+    text-align: center;
+    padding-block: 3rem;
+    z-index: 15;
+    color: black;
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+    padding-inline: .25rem;
+}
+.section-heading.related{
+    padding-top: 2rem;
+    padding-bottom: 0;
+}
+.section-heading h1,
+.section-heading h2{
+    color: hsl(36, 100%, 64%);
+    font-weight: 700;
+    font-size: 3rem;
+    text-shadow: 1px 1px 0px #a8a8a8;
+    
+}
+
+.container{
+    background-color: #f9f6f0;
+    min-height: 100vh;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem;
+    color: #000; 
+}
+.posts-container a{
+    color: #000;
+}
+
+.posts-container{
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.posts-container .item-card{
+    position: relative;
+    width: min(500px,90vw);
+    height: 500px;
+    border-radius: 5%;
+    margin-bottom: 2rem;
+    padding: .75rem;
+    background-color: white;
+    box-shadow: 0px 1px 12px 3px hsla(0, 0%, 0%, 0.2);
+
+}
+.item-card .card-info{
+    padding: .75rem;
+    border-radius: inherit;
+}
+.item-card figure{
+    position: relative;
+   
+    margin: auto;
+        width: 100%;
+    height: 350px;
+    border-radius:inherit ;
+    
+}
+.item-card img{
+       position: absolute;
+    inset: 0;
+    /* top: 0;
+    left: 0; */
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    border-radius:inherit;
+}
+.card-link{
+    position: absolute;
+    display: block;
+    inset: 0;
+    
+    cursor: pointer;
+    border-radius: inherit;
+}
+.main-wrapper{
+    position: relative;
+    width: 100%;
+}
+.toggle-nav{
+    display: none;
+}
+.page-header{
+    position: relative;
+    height:20rem;
+    width: 100%;
+}
+.header-img{
+    position: absolute;
+    inset: 0;
+}
+.header-img::after{
+    content: " ";
+     position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-image: linear-gradient(360deg, #f9f6f0, transparent);
+}
+.header-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.search-post{
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.search-post input{
+        padding: 1rem;
+    border-radius: 24px;
+    outline: none;
+    border: none;
+    background: #f9f6f0b8;
+    width:min(500px,80vw) ;
+}
+.text-container{
+    max-width: 800px;
+    margin: auto;
+    color: #000;
+    
+}
+
+.text-container h1,
+.text-container h2,
+.text-container h3,
+.text-container h4,
+.text-container h5{
+    margin: 1rem;
+    color: #333;
+}
+.contact-form {
+    width: 80%;
+    margin-inline: auto;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.contact-form input,
+.contact-form textarea{
+    padding: 1rem;
+    margin-block: 1rem;
+    width: 100%;
+    border-radius: 24px;
+    outline: none;
+    border: none;
+    background: #f9f6f0b8;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.contact-form button{ 
+    margin: auto;
+}
+header .image-attribution{
+    --attribution-color:#333333bd;
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    left: 2rem;
+    font-size: .75rem;
+    color: var(--attribution-color);
+    font-weight: 500;
+}
+header .image-attribution a{
+    color: var(--attribution-color);
+}
+.post .image-attribution{
+    position: absolute;
+    --attribution-color:#333333bd;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--attribution-color);
+    white-space: nowrap;
+    font-size: .75rem;
+}
+.post .image-attribution a{
+    color: var(--attribution-color);
+}
+
+    .posts-container .item-card{
+    width: 300px;
+    }
+    .post-header__data .post-title,
+    .post-header__data .location{
+        max-width: 800px;
+        margin: auto;
+        text-indent: 1rem;
+    }
+    .post-header__data .location{
+        text-indent: 2rem;
+    }
+
+@media (max-width:866px){
+    /* mobile-nav */
+   .nav a{
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 500;
+   }
+   .nav{
+    background: unset;
+   }
+    .toggle-nav {
+    display: inline-block;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    /* High z-index keeps the icon accessible over the drawer */
+  
+    z-index: 40; 
+  }
+
+  .toggle-nav svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-container {
+    background-image:linear-gradient(90deg, rgb(245 222 179 / 65%) 26%, rgb(255 182 71) 100%);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    transform: translateX(100%); /* Initial off-screen state handled by GSAP */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav .nav-items{
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+    .nav .nav-items li{
+        width: 100%;
+        height: 3rem;
+        margin-block: .75rem;
+    }
+    .text-container{
+        text-align: center;
+    }
+   header .image-attribution{
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 95%;
+    }
+}
