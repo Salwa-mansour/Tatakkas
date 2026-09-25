@@ -182,4 +182,7 @@
         transform: none;
         width: 250px;
     }
+    .footer-bottom-section{
+      justify-content: space-around;
+    }
 }

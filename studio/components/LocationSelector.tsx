@@ -1,17 +1,31 @@
-import  { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Country, City, ICountry, ICity } from 'country-state-city'
-import { set, unset, FormField, ObjectInputProps } from 'sanity'
-import {  Box, Card, Stack, Text } from '@sanity/ui'
+import { set, FormField, ObjectInputProps } from 'sanity'
+import { Box, Card, Stack, Text, TextInput } from '@sanity/ui'
 import { Autocomplete } from '@sanity/ui/autocomplete'
 
+interface ExtendedCountry extends ICountry {
+  nameAr?: string
+}
+
 interface CountryOption {
-  value: string // ISO code
-  payload: ICountry
+  value: string 
+  payload: ExtendedCountry
 }
 
 interface CityOption {
-  value: string // City name
+  value: string 
   payload: ICity
+}
+
+function normalizeArabic(text: string): string {
+  if (!text) return ''
+  return text
+    .toLowerCase()
+    .replace(/[أإآا]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/ى/g, 'ي')
+    .trim()
 }
 
 export function LocationSelector(props: ObjectInputProps) {
@@ -23,54 +37,101 @@ export function LocationSelector(props: ObjectInputProps) {
   const [selectedCityName, setSelectedCityName] = useState<string>(
     (value as any)?.cityName || ''
   )
+  const [manualCityNameAr, setManualCityNameAr] = useState<string>(
+    (value as any)?.cityNameAr || ''
+  )
 
-  const [allCountries] = useState<ICountry[]>(Country.getAllCountries())
+  const [allCountries, setAllCountries] = useState<ExtendedCountry[]>([])
   const [cities, setCities] = useState<ICity[]>([])
 
-  // Convert countries to @sanity/ui Autocomplete option format
+  // 1. Initialize Countries offline using Native Browser DisplayNames
+  useEffect(() => {
+    try {
+      const countryTranslator = new Intl.DisplayNames(['ar'], { type: 'region' })
+      const rawCountries = Country.getAllCountries()
+      
+      const enhancedCountries = rawCountries.map((c) => {
+        let nameAr = c.name
+        try {
+          nameAr = countryTranslator.of(c.isoCode) || c.name
+        } catch {
+          nameAr = c.name
+        }
+        return { ...c, nameAr }
+      })
+      setAllCountries(enhancedCountries)
+    } catch {
+      setAllCountries(Country.getAllCountries())
+    }
+  }, [])
+
+  // 2. Load cities offline from local node_modules memory storage
+  useEffect(() => {
+    if (!selectedCountryCode) {
+      setCities([])
+      return
+    }
+    const rawCities = City.getCitiesOfCountry(selectedCountryCode) || []
+    setCities(rawCities)
+  }, [selectedCountryCode])
+
+  // Conversion logic mappings for autocomplete selectors
   const countryOptions: CountryOption[] = useMemo(() => {
     return allCountries.map((c) => ({
-      value: c.isoCode,
+      value: `${c.name} ${c.nameAr || ''} (${c.isoCode})`,
       payload: c,
     }))
   }, [allCountries])
 
-  // Convert cities to @sanity/ui Autocomplete option format
   const cityOptions: CityOption[] = useMemo(() => {
     return cities.map((c) => ({
-      value: c.name,
+      value: c.name, 
       payload: c,
     }))
   }, [cities])
 
-  // Populate cities list when country code changes
-  useEffect(() => {
-    if (selectedCountryCode) {
-      setCities(City.getCitiesOfCountry(selectedCountryCode) || [])
-    } else {
-      setCities([])
-    }
-  }, [selectedCountryCode])
+  // Handle Country Updates
+  const handleSelectCountry = (inputValue: string) => {
+    const targetOption = countryOptions.find((o) => o.value === inputValue)
+    const countryCode = targetOption ? targetOption.payload.isoCode : ''
 
-  // Handle Country Selection
-  const handleSelectCountry = (countryCode: string) => {
-    setSelectedCountryCode(countryCode)
-    setSelectedCityName('') // Reset city on country change
-    setCities(City.getCitiesOfCountry(countryCode) || [])
-    onChange(unset()) // Clear stored location state until city is chosen
+    if (countryCode) {
+      setSelectedCountryCode(countryCode)
+      setSelectedCityName('') 
+      setManualCityNameAr('')
+      
+      const countryData = allCountries.find((c) => c.isoCode === countryCode)
+      onChange(
+        set({
+          countryName: countryData?.name || '',
+          countryNameAr: countryData?.nameAr || countryData?.name || '',
+          countryCode: countryCode,
+          cityName: '',
+          cityNameAr: '',
+          lat: 0,
+          lng: 0,
+        })
+      )
+    }
   }
 
-  // Handle City Selection
-  const handleSelectCity = (cityName: string) => {
-    setSelectedCityName(cityName)
+  // Handle City Selection (Extracting coordinates automatically)
+  const handleSelectCity = (inputValue: string) => {
+    const targetOption = cityOptions.find((o) => o.value === inputValue)
+    const cityName = targetOption ? targetOption.payload.name : ''
     
+    if (!cityName) return
+    
+    setSelectedCityName(cityName)
     const cityData = cities.find((c) => c.name === cityName)
     const countryData = allCountries.find((c) => c.isoCode === selectedCountryCode)
 
     if (cityData && countryData) {
       onChange(
         set({
+          ...value,
           countryName: countryData.name,
+          countryNameAr: countryData.nameAr || countryData.name,
           countryCode: selectedCountryCode,
           cityName: cityData.name,
           lat: parseFloat(cityData.latitude ?? '0'),
@@ -80,47 +141,58 @@ export function LocationSelector(props: ObjectInputProps) {
     }
   }
 
+  // Handle Manual Arabic Input Changes
+  const handleManualCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputVal = e.target.value
+    setManualCityNameAr(inputVal)
+    
+    onChange(
+      set({
+        ...value,
+        cityNameAr: inputVal // Storing custom Arabic text alongside system records
+      })
+    )
+  }
+
+  const currentCountry = allCountries.find((c) => c.isoCode === selectedCountryCode)
+  const currentCity = cities.find((c) => c.name === selectedCityName)
+
   return (
-    <FormField
-      title={schemaType.title}
-      description={schemaType.description}
-      path={path}
-    >
-      <Stack gap={3} style={{ marginTop: '8px' }}>
-        {/* Searchable Country Input */}
+    <FormField title={schemaType.title} description={schemaType.description} path={path}>
+      <Stack gap={3} style={{ marginTop: '8px' }} dir="rtl">
+        
+        {/* Country Picker */}
         <Box>
-          <Text size={1} weight="semibold" style={{ marginBottom: '6px' }}>
-            Country
-          </Text>
+          <Text size={1} weight="semibold" style={{ marginBottom: '6px' }}>الدولة (Country)</Text>
           <Autocomplete
             id="country-search"
             options={countryOptions}
-            placeholder="Type country name..."
-            value={selectedCountryCode}
+            placeholder="ابحث عن الدولة..."
+            value={currentCountry ? `${currentCountry.name} ${currentCountry.nameAr || ''} (${currentCountry.isoCode})` : ''}
             onChange={handleSelectCountry}
             renderOption={(option) => (
               <Card as="button" padding={2}>
-                <Text size={1}>{option.payload.name} ({option.payload.isoCode})</Text>
+                <Text size={1}>{option.payload.nameAr} ({option.payload.name})</Text>
               </Card>
             )}
-            filterOption={(query, option) =>
-              option.payload.name.toLowerCase().includes(query.toLowerCase())
-            }
-            renderValue={(value, option) => option?.payload.name || value}
+            filterOption={(query, option) => {
+              const cleanQuery = normalizeArabic(query)
+              return option.payload.name.toLowerCase().includes(cleanQuery) || 
+                     normalizeArabic(option.payload.nameAr || '').includes(cleanQuery)
+            }}
+            renderValue={(val, option) => option?.payload.nameAr || val}
           />
         </Box>
 
-        {/* Searchable City Input */}
+        {/* City Autocomplete (For Technical Coordinates Retrieval) */}
         {selectedCountryCode && (
           <Box>
-            <Text size={1} weight="semibold" style={{ marginBottom: '6px' }}>
-              City
-            </Text>
+            <Text size={1} weight="semibold" style={{ marginBottom: '6px' }}>اختر المدينة من القائمة (Select City for Coordinates)</Text>
             <Autocomplete
               id="city-search"
               options={cityOptions}
-              placeholder="Type city name..."
-              value={selectedCityName}
+              placeholder="اختر المدينة لتحديد خطوط الطول والعرض..."
+              value={currentCity ? currentCity.name : ''}
               onChange={handleSelectCity}
               renderOption={(option) => (
                 <Card as="button" padding={2}>
@@ -130,16 +202,33 @@ export function LocationSelector(props: ObjectInputProps) {
               filterOption={(query, option) =>
                 option.payload.name.toLowerCase().includes(query.toLowerCase())
               }
-              renderValue={(value) => value}
+              renderValue={(val) => val}
             />
           </Box>
         )}
 
-        {/* Saved Location Readout */}
+        {/* New Additional Manual Text Input for Arabic Custom Name */}
+        {selectedCityName && (
+          <Box>
+            <Text size={1} weight="semibold" style={{ marginBottom: '6px' }}>اسم المدينة باللغة العربية (City Name in Arabic)</Text>
+            <TextInput
+              placeholder="اكتب اسم المدينة باللغة العربية هنا..."
+              value={manualCityNameAr}
+              onChange={handleManualCityChange}
+              style={{ padding: '10px' }}
+            />
+          </Box>
+        )}
+
+        {/* Saved Location Summary Metadata Readout */}
         {(value as any)?.lat && (
           <Card padding={3} radius={2} tone="positive">
             <Text size={1}>
-              Saved: <strong>{(value as any).cityName}, {(value as any).countryName}</strong> (Lat: {(value as any).lat}, Lng: {(value as any).lng})
+              الموقع المحفوظ: <strong>{(value as any).cityNameAr || (value as any).cityName}، {currentCountry?.nameAr || (value as any).countryNameAr || (value as any).countryName}</strong> 
+              <br />
+              <span style={{ fontSize: '11px', opacity: 0.8 }}>
+                (خط عرض: {(value as any).lat}، خط طول: {(value as any).lng})
+              </span>
             </Text>
           </Card>
         )}
@@ -147,129 +236,3 @@ export function LocationSelector(props: ObjectInputProps) {
     </FormField>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react'
-// import { Country, City, ICountry, ICity } from 'country-state-city'
-// import { set, unset, FormField } from 'sanity'
-
-// export function LocationSelector(props: any) {
-//   const { value, onChange, schemaType } = props
-
-//   const [selectedCountryCode, setSelectedCountryCode] = useState<string>('')
-//   const [countries] = useState<ICountry[]>(Country.getAllCountries())
-//   const [cities, setCities] = useState<ICity[]>([])
-
-//   // On component load, set initial cities if a country code is already stored
-//   useEffect(() => {
-//     if (value?.countryCode) {
-//       setSelectedCountryCode(value.countryCode)
-//       setCities(City.getCitiesOfCountry(value.countryCode) || [])
-//     }
-//   }, [value?.countryCode])
-
-//   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//     const code = e.target.value
-//     setSelectedCountryCode(code)
-    
-//     if (code) {
-//       const countryCities = City.getCitiesOfCountry(code) || []
-//       setCities(countryCities)
-//     } else {
-//       setCities([])
-//       onChange(unset())
-//     }
-//   }
-
-//   const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//     const cityName = e.target.value
-//     if (!cityName) return
-
-//     const cityData = cities.find((c) => c.name === cityName)
-//     const countryData = countries.find((c) => c.isoCode === selectedCountryCode)
-
-//     if (cityData && countryData) {
-//      const latVal = parseFloat(cityData.latitude ?? '0')
-//       const lngVal = parseFloat(cityData.longitude ?? '0')
-//       // Writes object directly to Sanity document state
-//       onChange(
-//         set({
-//           countryName: countryData.name,
-//           countryCode: selectedCountryCode,
-//           cityName: cityData.name,
-//           lat: latVal,
-//           lng: lngVal,
-//         })
-//       )
-//     }
-//   }
-
-//   return (
-//     <FormField
-//       title={schemaType.title}
-//       description={schemaType.description}
-//       path={props.path}
-//     >
-//       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '8px' }}>
-//         {/* Country Dropdown */}
-//         <div>
-//           <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>
-//             Country
-//           </label>
-//           <select
-//             value={selectedCountryCode}
-//             onChange={handleCountryChange}
-//             style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-//           >
-//             <option value="">Select a country...</option>
-//             {countries.map((c) => (
-//               <option key={c.isoCode} value={c.isoCode}>
-//                 {c.name}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
-
-//         {/* City Dropdown */}
-//         {selectedCountryCode && (
-//           <div>
-//             <label style={{ fontSize: '12px', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>
-//               City
-//             </label>
-//             <select
-//               value={value?.cityName || ''}
-//               onChange={handleCityChange}
-//               style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
-//             >
-//               <option value="">Select a city...</option>
-//               {cities.map((c, index) => (
-//                 <option key={`${c.name}-${index}`} value={c.name}>
-//                   {c.name}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
-//         )}
-
-//         {/* Stored Location Readout */}
-//         {value?.lat && (
-//           <div style={{ fontSize: '12px', color: '#666', background: '#f5f5f5', padding: '8px', borderRadius: '4px' }}>
-//             Saved Coords: {value.cityName}, {value.countryName} ({value.lat}, {value.lng})
-//           </div>
-//         )}
-//       </div>
-//     </FormField>
-//   )
-// }

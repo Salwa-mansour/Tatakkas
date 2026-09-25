@@ -64,7 +64,7 @@ export default function RelatedPosts({ currentSlug, country }) {
             </h4>
              {post.locationDetails && (
                   <h6 className="location">
-                    📍 {post.locationDetails.cityName}, {post.locationDetails.countryName}
+                    📍 {post.locationDetails.cityName}, {post.locationDetails.countryNameAr}
                   </h6>
                 )}
                 <Link

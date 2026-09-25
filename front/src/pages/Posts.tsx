@@ -14,7 +14,9 @@ export interface Post {
   body: any;
   locationDetails?: {
     countryName: string;
+    countryNameAr:string;
     cityName: string;
+    cityNameAr:string;
     lat: number;
     lng: number;
   };
@@ -176,8 +178,8 @@ client
               </figure>
               <div className="card-info">
                 {post.locationDetails && (
-                  <h6 className="location">
-                    📍 {post.locationDetails.cityName}, {post.locationDetails.countryName}
+                  <h6 className="location" style={{outline:'1px solid'}}>
+                    📍 {post.locationDetails.cityNameAr ||post.locationDetails.cityName}, {post.locationDetails.countryNameAr ||post.locationDetails.countryName}
                   </h6>
                 )}
                 <h3 className="post-title">{post.title}</h3>

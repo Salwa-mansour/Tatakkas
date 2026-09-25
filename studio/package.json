@@ -12,6 +12,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@countrystatecity/translations": "^1.0.4",
     "@sanity/document-internationalization": "^6.2.37",
     "@sanity/icons": "^5.2.1",
     "@sanity/ui": "^4.0.6",

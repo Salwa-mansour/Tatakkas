@@ -223,6 +223,7 @@ figure img{
     border-radius: var(--border-radius);
     box-shadow: var(--container-shadow);
     margin-inline: var(--post-page-margin);
+    direction: ltr;
 }
 /* Bottom Metrics Grid */
 .weather-metrics-grid {
