@@ -8,6 +8,7 @@ import '../css/home.css'
 import Features from '../components/Features'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import ProgressiveImage from '../components/ProgressiveImage'
 
 // Register plugins outside the component
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -27,6 +28,10 @@ export default function Home() {
     const query = `{
       "home": *[_type == "home"][0]{
         ...,
+        heroImage {
+          asset,
+        }
+        ,
         "featuresList": featuresList[]{
           ...,
           "heading": coalesce(heading, linkedPost->title),
@@ -105,9 +110,9 @@ export default function Home() {
     { scope: containerRef }
   )
 
-  const heroImageSrc = homeData?.heroImage 
-    ? urlFor(homeData.heroImage).url() 
-    : ' '
+  // const heroImageSrc = homeData?.heroImage 
+  //   ? urlFor(homeData.heroImage).url() 
+  //   : ' '
 
   // SEO Fallback Hierarchy Calculations
   const seoTitle = 
@@ -124,7 +129,7 @@ export default function Home() {
 
   const ogImageSource = 
     homeData?.seo?.openGraphImage || 
-    homeData?.heroImage || 
+    homeData?.heroImage?.asset || 
     globalSettings?.seo?.openGraphImage;
 
   const ogImageUrl = ogImageSource 
@@ -146,12 +151,17 @@ export default function Home() {
       <div ref={containerRef}>
         <section className="hero">
           <div className="hero-image-wrapper">
-            <img
+            {/* <img
               className="hero-image"
               src={heroImageSrc}
               alt="Hero background visual"
-            />
-
+              loading="eager" 
+              fetchPriority="high"
+            /> */}
+            {homeData &&
+              <ProgressiveImage  imageObject={homeData.heroImage} alt={'Hero background visual'} isPrior={true} classNames={'hero-image'}/>
+            }
+        
             <div className="sun-glow-wrapper">
               <div className="sun-shine"></div>
               <svg viewBox="0 0 100 100" className="sun-icon">
