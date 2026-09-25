@@ -272,7 +272,8 @@ figure img{
   line-height: 1.2;
 }
 .inputText{
-  font-size: 1rem;
+  font-size: .9rem;
+  white-space: nowrap;
 }
 /* Loading & Error States */
 .weather-message {
@@ -426,7 +427,8 @@ figure img{
     width: 20rem;
    }
    .date-text{
-    width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
    }
    .weather-summary-wrapper{
     width: 80vw;
@@ -485,6 +487,7 @@ figure img{
    }
 
    .weather-inline-wrapper {
+        padding-top: 2rem;
         max-height: calc(100vh - 2rem); /* Constrain inner content height instead */
         display: flex;
         flex-direction: column;

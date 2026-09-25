@@ -270,6 +270,7 @@ header .image-attribution{
     font-size: .75rem;
     color: var(--attribution-color);
     font-weight: 500;
+    white-space: nowrap;
 }
 header .image-attribution a{
     color: var(--attribution-color);
@@ -358,5 +359,6 @@ header .image-attribution a{
         left: 50%;
         transform: translateX(-50%);
         bottom: 95%;
+        font-size: .5rem;
     }
 }

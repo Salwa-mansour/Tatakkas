@@ -34,10 +34,10 @@ export function WeatherDatePicker({ weather }: SubComponentProps) {
   }
 
   return (
-    <div className="weather-box box">
+    <div className="weather-box ">
       {/* Input Trigger */}
       <div
-        className="date-text "
+        className="date-text box"
         id="date-toggler"
         onClick={() => weather.setIsOpen(!weather.isOpen)}
         role="button"

@@ -1,17 +1,39 @@
 import { useState, useRef,useEffect } from 'react'
-
+import { client } from '../sanity/sanityClient';
 import { Link, useLocation } from 'react-router-dom'
 import { NavbarSearch } from './NavbarSearch'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { urlFor } from '../utils/urlFor';
 
 function Nav() {
   const location = useLocation()
-  const isHome = location.pathname === '/'
-
-  const [isOpen, setIsOpen] = useState(false)
-  const containerRef = useRef(null)
-  const timelineRef = useRef(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+  const timelineRef = useRef(null);
+   const [siteData, setSiteData] = useState({});
+  
+    useEffect(() => {
+      const query = `*[_type == "siteSettings"][0]{
+        siteName,
+        siteLogo,
+       
+      }`;
+  
+      client
+        .fetch(query)
+        .then((data) => {
+          if (data?.siteName) {
+            const siteLogo = urlFor(data.siteLogo).width(300).url();
+            setSiteData({
+              siteName: data.siteName,
+              siteLogo,
+          
+            });
+          }
+        })
+        .catch((err) => console.error('Failed to fetch site data:', err));
+    }, []);
 
   // 1. Handle body overflow toggle whenever isOpen changes
   useEffect(() => {
@@ -115,7 +137,7 @@ function Nav() {
   return (
     <nav className={`nav `} ref={containerRef}>
       <Link to="/" className="logo" onClick={handleLinkClick}>
-        <img src='https://res.cloudinary.com/du6d1qifw/image/upload/v1789199121/muttajahSite/logoipsum-380_jsncbq.png' alt="logo" />
+        <img src={siteData.siteLogo} alt={siteData.siteName} />
       </Link>
 
       <button className="toggle-nav" onClick={toggleMenu} aria-label="Toggle Navigation">
