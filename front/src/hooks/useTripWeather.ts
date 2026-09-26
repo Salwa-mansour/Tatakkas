@@ -37,20 +37,21 @@ export interface DailySummary {
 
 export function getWeatherDetails(code: number): WeatherInfo {
   switch (code) {
-    case 0: return { label: 'Clear Sky', icon: '☀️' }
-    case 1: return { label: 'Mainly Clear', icon: '🌤️' }
-    case 2: return { label: 'Partly Cloudy', icon: '⛅' }
-    case 3: return { label: 'Overcast', icon: '☁️' }
-    case 45: case 48: return { label: 'Foggy', icon: '🌫️' }
-    case 51: case 53: case 55: return { label: 'Drizzle', icon: '🌧️' }
-    case 61: case 63: case 65: return { label: 'Rain', icon: '🌧️' }
-    case 66: case 67: return { label: 'Freezing Rain', icon: '🌧️❄️' }
-    case 71: case 73: case 75: case 77: return { label: 'Snowfall', icon: '❄️' }
-    case 80: case 81: case 82: return { label: 'Rain Showers', icon: '🌦️' }
-    case 85: case 86: return { label: 'Snow Showers', icon: '🌨️' }
-    case 95: return { label: 'Thunderstorm', icon: '⛈️' }
-    case 96: case 99: return { label: 'Thunderstorm w/ Hail', icon: '⛈️🧊' }
-    default: return { label: 'Unknown', icon: '🌡️' }
+  case 0: return { label: 'مشمس', icon: '☀️' }
+case 1: return { label: 'صحو جزئي', icon: '🌤️' }
+case 2: return { label: 'غائم جزئياً', icon: '⛅' }
+case 3: return { label: 'غائم', icon: '☁️' }
+case 45: case 48: return { label: 'ضبابي', icon: '🌫️' }
+case 51: case 53: case 55: return { label: 'رذاذ', icon: '🌧️' }
+case 61: case 63: case 65: return { label: 'مطر', icon: '🌧️' }
+case 66: case 67: return { label: 'مطر متجمد', icon: '🌧️❄️' }
+case 71: case 73: case 75: case 77: return { label: 'تساقط الثلوج', icon: '❄️' }
+case 80: case 81: case 82: return { label: 'زخات مطر', icon: '🌦️' }
+case 85: case 86: return { label: 'زخات ثلجية', icon: '🌨️' }
+case 95: return { label: 'عاصفة رعدية', icon: '⛈️' }
+case 96: case 99: return { label: 'عاصفة رعدية و بَرَد', icon: '⛈️🧊' }
+default: return { label: 'غير معروف', icon: '🌡️' }
+
   }
 }
 

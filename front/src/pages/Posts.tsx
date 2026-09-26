@@ -155,7 +155,7 @@ client
         <form className="search-post" onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
-            placeholder="Search by title, city, or country..."
+            placeholder="ابحث عن منشور , دولة  أو مدينة"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -178,7 +178,7 @@ client
               </figure>
               <div className="card-info">
                 {post.locationDetails && (
-                  <h6 className="location" style={{outline:'1px solid'}}>
+                  <h6 className="location" >
                     📍 {post.locationDetails.cityNameAr ||post.locationDetails.cityName}, {post.locationDetails.countryNameAr ||post.locationDetails.countryName}
                   </h6>
                 )}

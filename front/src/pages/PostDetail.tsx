@@ -159,7 +159,8 @@ useGSAP(() => {
                   <h1 className="post-title">{post.title}</h1>
                   {post.locationDetails && (
                     <h6 className="location">
-                      📍 {post.locationDetails.cityName}, {post.locationDetails.countryName}
+                       📍 {post.locationDetails.cityNameAr ||post.locationDetails.cityName}, {post.locationDetails.countryNameAr ||post.locationDetails.countryName}
+                  
                     </h6>
                   )}
                 </div>
@@ -199,7 +200,7 @@ useGSAP(() => {
                             components={customPortableTextComponents}
                           />
                         ) : (
-                          <p>No content written yet.</p>
+                          <p>لا يوجد محتوى</p>
                         )}
                   </div>
               </div>

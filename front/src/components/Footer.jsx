@@ -34,7 +34,7 @@ export default function Footer() {
       {/* Upper Footer */}
       <div className="footer-top-section">
         <div className="footer-brand-column">
-          <Link to="/" className="footer-logo-wrapper">
+          <Link to="/" className="footer-logo-wrapper" title='الرئيسية'>
             <img src={siteData.siteLogo} alt={siteData.siteName} className="footer-logo" />
           </Link>
           <p className="footer-tagline">
@@ -44,12 +44,12 @@ export default function Footer() {
 
         <div className="footer-links-group">
           {/* Navigation Card */}
-          <h6 className="footer-heading">Explore ⚡</h6>
+          <h6 className="footer-heading">روابط ⚡</h6>
           <div className="footer-card-column">
             
-            <Link to="/posts" className="footer-link">discover</Link>
-            <Link to="/about" className="footer-link">about</Link>
-            <Link to="/contact" className="footer-link">contact</Link>
+            <Link to="/posts" className="footer-link">تطقَّس</Link>
+            <Link to="/about" className="footer-link">عنّا</Link>
+            <Link to="/contact" className="footer-link">تواصل</Link>
           </div>
 
           {/* Social Card */}
@@ -66,13 +66,20 @@ export default function Footer() {
 
       {/* Bottom Footer */}
       <div className="footer-bottom-section">
-        <p className="footer-copyright">
-          &copy; {new Date().getFullYear()} {siteData.siteName}. Crafted with 💙 by <a href="https://salwamansour.netlify.app/" className="footer-author-link">Muttajah</a>.
+        {/* <p className="footer-copyright">
+          &copy; {new Date().getFullYear()} {siteData.siteName}.  💙 by <a href="https://salwamansour.netlify.app/" className="footer-author-link">Muttajah</a>.
+        </p> */}
+      
+        <p dir="rtl">
+          جميع حقوق الطبع والنشر &copy; {new Date().getFullYear()} محفوظة لـ 
+          <a href="#">DestCast</a> & 
+          <a href="#">مُتَّجه</a> للتطوير
         </p>
+            
 
         <div className="footer-legal-links">
-          <Link to="/privacy-policy" className="footer-link">privacy policy</Link>
-          <Link to="/terms-of-service" className="footer-link">terms of service</Link>
+          <Link to="/privacy-policy" className="footer-link">سياسة الخصوصية</Link>
+          <Link to="/terms-of-service" className="footer-link">بنود الخدمة</Link>
         </div>
       </div>
     </footer>

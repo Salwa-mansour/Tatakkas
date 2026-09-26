@@ -46,7 +46,7 @@ export function WeatherDatePicker({ weather }: SubComponentProps) {
         <span className="inputText">
           {hasRangeSet
             ? `${startDateStr} - ${endDateStr}`
-            : 'Search the weather in specific period'}
+            : 'اضغط هنا للاستعلام عن الطقس'}
         </span>
 
         <div role="icon" className="search-icon">
@@ -147,7 +147,7 @@ export function WeatherSummary({ weather }: SubComponentProps) {
   }
 
   return (
-    <div className="weather-card" title='Weather Overview'>
+    <div className="weather-card" title='ملخص الطقس'>
       {/* Top Row: Main Illustration on Left, Temperatures on Right */}
       <div className="weather-main-row">
         <div className="weather-hero-icon">
@@ -155,11 +155,11 @@ export function WeatherSummary({ weather }: SubComponentProps) {
         </div>
 
         <div className="weather-temp-display">
-          <span className="temp-main">{tempHigh}°</span>
+          <p className="temp-main" title="درجة الحرارة الكبرى">{tempHigh}°</p>
           {tempLow !== null && (
             <>
               <span className="temp-divider">/</span>
-              <span className="temp-sub">{tempLow}°</span>
+              <p className="temp-sub" title="درجة الحرارة الصغرى">{tempLow}°</p>
             </>
           )}
         </div>
@@ -170,19 +170,19 @@ export function WeatherSummary({ weather }: SubComponentProps) {
         <li className="metric-item">
           <span className="metric-icon">🌧️</span>
           <span className="metric-value">{precip}%</span>
-          <span className="metric-label">Precipitation</span>
+          <span className="metric-label" >معدل الهطول</span>
         </li>
 
         <li className="metric-item">
           <span className="metric-icon">💧</span>
           <span className="metric-value">{humidity}%</span>
-          <span className="metric-label">Humidity</span>
+          <span className="metric-label">الرطوبة</span>
         </li>
 
         <li className="metric-item">
           <span className="metric-icon">💨</span>
-          <span className="metric-value">{windSpeed}km/h</span>
-          <span className="metric-label">Wind Speed</span>
+          <span className="metric-value">{windSpeed}كم/س</span>
+          <span className="metric-label">الرياح</span>
         </li>
       </ul>
     </div>

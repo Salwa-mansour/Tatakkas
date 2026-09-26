@@ -154,17 +154,17 @@ function Nav() {
         <ul className="nav-items">
           <li>
             <Link to="/posts" onClick={handleLinkClick}>
-              discover
+              تطقّس
             </Link>
           </li>
           <li>
             <a href="/about " onClick={handleLinkClick}>
-              about
+              عنّا
             </a>
           </li>
           <li>
             <a href="/contact" onClick={handleLinkClick}>
-              Contact
+              تواصل
             </a>
           </li>
           <li className='search-item'>

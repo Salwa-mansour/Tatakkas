@@ -43,7 +43,7 @@ export default function RelatedPosts({ currentSlug, country }) {
   return (
     <section className="posts-container ">
         <div className="section-heading related">
-            <h3>More posts about {country}</h3>
+            <h3> قد يهمك أيضاً  </h3>
         </div>
       
       <div className="related-posts-grid">
@@ -64,7 +64,7 @@ export default function RelatedPosts({ currentSlug, country }) {
             </h4>
              {post.locationDetails && (
                   <h6 className="location">
-                    📍 {post.locationDetails.cityName}, {post.locationDetails.countryNameAr}
+                     📍 {post.locationDetails.cityNameAr ||post.locationDetails.cityName}, {post.locationDetails.countryNameAr ||post.locationDetails.countryName}
                   </h6>
                 )}
                 <Link

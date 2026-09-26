@@ -89,11 +89,11 @@ export function NavbarSearch({ hideMobileNav }: NavbarSearchProps) {
           <input
             type="text"
             name='search'
-            placeholder="Search posts..."
+            placeholder="ابحث هنا"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button type='submit'>search</button>
+          <button type='submit'>بحث</button>
         </div>
       </form>
     </div>
