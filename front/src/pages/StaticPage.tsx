@@ -4,6 +4,7 @@ import { PortableText } from '@portabletext/react';
 import { client } from '../sanity/sanityClient';
 import { urlFor } from '../utils/urlFor';
 import { Helmet } from 'react-helmet-async';
+import ProgressiveImage from '../components/ProgressiveImage';
 
 interface PageData {
   title: string;
@@ -71,15 +72,16 @@ export default function StaticPage() {
       <header className="page-header">
           {pageData?.headerImage && pageData?.headerImage.asset && (
             <figure  className="header-img" tab-index="-1">
-              <img
-                src={urlFor(pageData?.headerImage.asset).width(1200).height(600).url()}
-                alt={pageData?.title || "Page header"}
-              />
-              {pageData.headerImage?.imageAttribution && (
+             
+             
+              {pageData.headerImage && (
+                <>
+                  <ProgressiveImage imageObject={pageData?.headerImage} alt={pageData?.title || "Page header"} isPrior={true} />
                   <figcaption 
                     className="image-attribution"
                     dangerouslySetInnerHTML={{ __html: pageData.headerImage.imageAttribution }} 
                   />
+                </>
                 )}
             </figure>
           )}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { urlFor } from '../utils/urlFor';
 
-function ProgressiveImage({ imageObject, alt="image", isPrior = false,classNames }) {
+function ProgressiveImage({ imageObject, alt="image",size="1200", isPrior = false,classNames="" }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // If no image from Sanity, use your fallback
@@ -10,7 +10,7 @@ function ProgressiveImage({ imageObject, alt="image", isPrior = false,classNames
   }
 
   const lowResUrl = urlFor(imageObject).width(50).blur(20).url();
-  const highResUrl = urlFor(imageObject).url();
+  const highResUrl = urlFor(imageObject).width(size).url();
 
   return (
     <>

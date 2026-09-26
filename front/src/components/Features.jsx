@@ -562,7 +562,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
   {/* Feature 1 */}
   <div className="feature sunny-feature">
     {/* <img src={data?.featuresList?.[0]?.image ? urlFor(data.featuresList[0].image).url():""} alt="Feature 1" /> */}
-    <ProgressiveImage imageObject={data?.featuresList?.[0]?.image} alt={data?.featuresList?.[0]?.heading} />
+    <ProgressiveImage imageObject={data?.featuresList?.[0]?.image} alt={data?.featuresList?.[0]?.heading} size='600' />
     <div className="feature-content">
       <h2>{data?.featuresList?.[0]?.heading }</h2>
       <p>{data?.featuresList?.[0]?.text }</p>
@@ -577,7 +577,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
   {/* Feature 2 */}
   <div className="feature cloud-sun-feature">
     {/* <img src={data?.featuresList?.[1]?.image ? urlFor(data.featuresList[1].image).url() :""} alt="Feature 2" width="300" /> */}
-     <ProgressiveImage imageObject={data?.featuresList?.[1]?.image} alt={data?.featuresList?.[1]?.heading} />
+     <ProgressiveImage imageObject={data?.featuresList?.[1]?.image} alt={data?.featuresList?.[1]?.heading} size='600' />
     <div className="feature-content">
       <h2>{data?.featuresList?.[1]?.heading}</h2>
       <p>{data?.featuresList?.[1]?.text }</p>
@@ -592,7 +592,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
   {/* Feature 3 (Fallback safely if data has fewer items) */}
   <div className="feature cloudy-feature">
     {/* <img src={data?.featuresList?.[2]?.image ? urlFor(data.featuresList[2].image).url() : ''} alt="Feature 3" width="300" /> */}
-     <ProgressiveImage imageObject={data?.featuresList?.[2]?.image} alt={data?.featuresList?.[2]?.heading} />
+     <ProgressiveImage imageObject={data?.featuresList?.[2]?.image} alt={data?.featuresList?.[2]?.heading} size='600' />
     <div className="feature-content">
       <h2>{data?.featuresList?.[2]?.heading }</h2>
       <p>{data?.featuresList?.[2]?.text }</p>
@@ -607,7 +607,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
   {/* Feature 4 */}
   <div className="feature rainy-feature">
     {/* <img src={data?.featuresList?.[3]?.image ? urlFor(data.featuresList[3].image).url() : ''} alt="Feature 4" width="300" /> */}
-     <ProgressiveImage imageObject={data?.featuresList?.[3]?.image} alt={data?.featuresList?.[3]?.heading} />
+     <ProgressiveImage imageObject={data?.featuresList?.[3]?.image} alt={data?.featuresList?.[3]?.heading} size='600' />
     <div className="feature-content">
       <h2>{data?.featuresList?.[3]?.heading }</h2>
       <p>{data?.featuresList?.[3]?.text }</p>
@@ -622,7 +622,7 @@ bindScrollToLabels(allFeatures[3], "rainyStart", "rainyEnd", {
   {/* Feature 5 */}
   <div className="feature snowy-feature">
     {/* <img src={data?.featuresList?.[4]?.image ? urlFor(data.featuresList[4].image).url() : ''} alt="Feature 5" width="300" /> */}
-     <ProgressiveImage imageObject={data?.featuresList?.[4]?.image} alt={data?.featuresList?.[4]?.heading} />
+     <ProgressiveImage imageObject={data?.featuresList?.[4]?.image} alt={data?.featuresList?.[4]?.heading} size='600' />
     <div className="feature-content">
       <h2>{data?.featuresList?.[4]?.heading }</h2>
       <p>{data?.featuresList?.[4]?.text }</p>

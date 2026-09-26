@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { client } from '../sanity/sanityClient';
 import { urlFor } from '../sanity/sanityClient';
+import ProgressiveImage from './ProgressiveImage';
 
 export default function RelatedPosts({ currentSlug, country }) {
   const [relatedPosts, setRelatedPosts] = useState([]);
@@ -17,7 +18,9 @@ export default function RelatedPosts({ currentSlug, country }) {
         title,
         slug,
         publishedAt,
-        "imageUrl": mainImage.asset->url,
+        mainImage {
+          asset,
+        },
         locationDetails
       }`;
       const params = { country, currentSlug };
@@ -49,13 +52,9 @@ export default function RelatedPosts({ currentSlug, country }) {
       <div className="related-posts-grid">
         {relatedPosts.map((post) => (
           <article key={post._id} className="item-card">
-            {post.imageUrl &&
+            {post.mainImage &&
             <figure className="post-img">
-                <img
-                    src={urlFor(post.imageUrl).width(1200).height(600).url()}
-                    alt={post.title}
-                    width={300}
-                 />
+                <ProgressiveImage imageObject={post.mainImage} size={'600'} />
              </figure>
              }
             <div className="card-info">

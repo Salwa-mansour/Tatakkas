@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { usePageMetadata } from '../hooks/usePageMetadata';
 import { urlFor } from '../utils/urlFor';
 import { Helmet } from 'react-helmet-async';
+import ProgressiveImage from '../components/ProgressiveImage';
 
 export default function Contact() {
   const [status, setStatus] = useState(null); // { type: 'success' | 'error', message: string }
@@ -51,7 +52,7 @@ export default function Contact() {
   
   const ogImageSource = pageMetaData?.seo?.openGraphImage || pageMetaData?.headerImage;
   const ogImageUrl = ogImageSource 
-    ? urlFor(ogImageSource).width(1200).height(630).url() 
+    ? urlFor(ogImageSource).width(600).url() 
     : undefined;
 
   return (
@@ -67,17 +68,13 @@ export default function Contact() {
       </Helmet>
           <header className="page-header">
           <figure className="header-img" tabIndex={-1}>
-            {pageMetaData?.headerImage && pageMetaData?.headerImage.asset && (
-              <img
-                src={urlFor(pageMetaData?.headerImage).width(1200).height(600).url()}
-                alt={pageMetaData.title || 'Contact Header'}
-              />
-              
+            {pageMetaData?.headerImage && pageMetaData?.headerImage.asset && (        
+              <ProgressiveImage imageObject={pageMetaData?.headerImage} isPrior={true} alt='page header' />
             )}
-             <figcaption 
-            className="image-attribution"
-            dangerouslySetInnerHTML={{ __html: pageMetaData?.headerImage?.imageAttribution }} 
-          />
+            <figcaption 
+              className="image-attribution"
+              dangerouslySetInnerHTML={{ __html: pageMetaData?.headerImage?.imageAttribution }} 
+            />
           </figure>
         </header>
 

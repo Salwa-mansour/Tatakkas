@@ -17,6 +17,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import RelatedPosts from '../components/RelatedPosts'
+import ProgressiveImage from '../components/ProgressiveImage'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,7 +99,7 @@ useGSAP(() => {
   const seoTitle = post?.seo?.metaTitle || post?.title || "DestCast";
   const seoDescription = post?.seo?.metaDescription;
   const ogImageUrl = post?.seo?.openGraphImage 
-    ? urlFor(post.seo.openGraphImage).width(1200).height(630).url() 
+    ? urlFor(post.seo.openGraphImage).width(600).url() 
     : undefined;
 
   return (
@@ -143,10 +144,8 @@ useGSAP(() => {
               <header className="post-header" role="post header">
                 {post.mainImage?.asset && (
                   <figure className="main-img">
-                    <img
-                      src={urlFor(post.mainImage.asset).width(1200).height(600).url()}
-                      alt={post.title}
-                    />
+                   
+                    <ProgressiveImage imageObject={post.mainImage} alt={post?.title} isPrior={true} />
                   {post.mainImage?.imageAttribution && (
                     <figcaption 
                       className="image-attribution"
