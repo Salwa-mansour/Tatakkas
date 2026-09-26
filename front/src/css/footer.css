@@ -184,5 +184,6 @@
     }
     .footer-bottom-section{
       justify-content: space-around;
+      text-align: center;
     }
 }
